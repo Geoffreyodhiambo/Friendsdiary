@@ -1,0 +1,46 @@
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+        <li class="nav-item">
+          <%= link_to "About us", home_about_path, class:"nav-link" %>          
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "Add friend", new_friend_path, class:"nav-link" %>          
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign out", destroy_user_session_path, method: :delete, class:"nav-link" %>          
+          </li>
+          <li class="nav-item">
+            <%= link_to "Edit profile", edit_user_registration_path, class:"nav-link" %>          
+          </li>  
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class:"nav-link" %>          
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign in", new_user_session_path, class:"nav-link" %>          
+          </li>
+        <% end %> 
+      </ul>
+
+
+
+
+      <%= link_to "Sign out", destroy_user_session_path, method: :delete, class:"nav-link" %>
+
+
+
+       <div class="field form-group">
+    <% f.label :email %><br />
+    <%= f.email_field :email, class:"form-control", placeholder:"Email", autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Resend confirmation instructions" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+
+
+      skip time to watch john elder...2.54.11 ----3.06.00

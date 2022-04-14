@@ -1,0 +1,75 @@
+<%= form_with(model: friend) do |form| %>
+  <% if friend.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(friend.errors.count, "error") %> prohibited this friend from being saved:</h2>
+
+      <ul>
+        <% friend.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <% form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name, class:"form-control", placeholder:"first_name" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name, class:"form-control", placeholder:"last_name" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :email, style: "display: block" %>
+    <%= form.text_field :email, class:"form-control", placeholder:"email" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :phone, style: "display: block" %>
+    <%= form.text_field :phone, class:"form-control", placeholder:"phone" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :twitter, style: "display: block" %>
+    <%= form.text_field :twitter, class:"form-control" , placeholder:"twitter" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :password, style: "display: block" %>
+    <%= form.text_field :password, class:"form-control", placeholder:"passward" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :instagram, style: "display: block" %>
+    <%= form.text_field :instagram, class:"form-control", placeholder:"instagram" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :facebook, style: "display: block" %>
+    <%= form.text_field :facebook, class:"form-control", placeholder:"facebook" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :favourite, style: "display: block" %>
+    <%= form.text_field :favourite, class:"form-control", placeholder:"favourite" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :birth_date, style: "display: block", placeholder:"birth_date"  %>
+    <%= form.date_field :birth_date, class:"form-control" %>
+  </div>
+
+  <div class="field form-group">
+    <%  form.label :user_id, style: "display: block" %>
+    <%= form.number_field :user_id, id: :friend_user_id, class:"form-control", value:current_user.id, type: :hidden %>
+
+  </div>
+
+
+  <br/>
+  <div>
+    <%= form.submit class:'btn btn-secondary' %>
+  </div>
+<% end %>
