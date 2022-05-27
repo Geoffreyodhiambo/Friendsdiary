@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_14_063045) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_27_065125) do
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "data_fingerprint"
+    t.string "type", limit: 30
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
   create_table "friends", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -25,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_14_063045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.text "description"
     t.index ["user_id"], name: "index_friends_on_user_id"
   end
 

@@ -1,11 +1,33 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @friend %>
 
-<div>
+
+<div class="bg-light p-5">
+  <h1 class="display-4">
+    <%= @friend.first_name %>
+    <%= @friend.last_name %>
+  </h1>
+  
+  <p class="lead">
+    <%= @friend.email %> | <%= @friend.phone %> | <%= @friend.twitter %> |
+
+    <%= @friend.favourite %> | <%= @friend.facebook %> | <%= @friend.birth_date %> | 
+  </p>
+  
+   <div>
+    <p class="lead">
+      <%= @friend.description %> 
+  </p>
+  </div>
+
+  
+
   <br/>
+  <!-- to create a line: <hr class="my-4"> -->
+  
+  <%= link_to 'Edit', edit_friend_path(@friend), class:"btn btn-dark" %> <!-- to add something to the screen you dont need special structure like <>, you could just put: | , (or any other text) in between these two lines and it will show on screen -->
 
-  <%= link_to "Edit this friend", edit_friend_path(@friend), class:"btn btn-secondary" %>  
-  <%= link_to "Back to friends", friends_path, class:"btn btn-dark" %> <br/><br/>
-  <%= button_to "Destroy this friend", @friend, method: :delete %>
+  <%= link_to 'Delete', @friend, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger"%>
+  
+  <%= link_to 'Back', friends_path, class:"btn btn-secondary" %>
 </div>

@@ -1,3 +1,91 @@
+
+<form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+
+ has_attached_file :image, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
+
+
+<div>
+      <%= image_tag @friend.image.url %>
+      <%= image_tag @friend.image.url(:medium) %>
+      <%= image_tag @friend.image.url(:thumb) %>   
+  </div>
+
+<div class="field form-group">
+    
+    <%= form.file_field :image, class:"form-control", placeholder:"image" %>
+  </div>
+
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class:"form-control", placeholder:"Email", autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, class:"form-control", placeholder:"Password", autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, class:"form-control", placeholder:"password_confirmation", autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up", class:'btn btn-secondary' %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+
+
+
+
+
+
+
+<h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field form-group">
+    <% f.label :email %><br />
+    <%= f.email_field :email, class:"form-control", placeholder:"Email", autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field form-group">
+    <%f.label :password %><br />
+    <%= f.password_field :password, class:"form-control", placeholder:"Password", autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field form-group">
+      <%= f.check_box :remember_me, class:"form-check-input" %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions form-group">
+    <%= f.submit "Log in", class:'btn btn-secondary'%>
+  </div>
+<% end %>  
+<br/>
+
+<%= render "devise/shared/links" %>
+
+
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
         <li class="nav-item">
           <%= link_to "About us", home_about_path, class:"nav-link" %>          
@@ -23,7 +111,8 @@
       </ul>
 
 
-
+<% @friends.each do |friend| %>
+<% end %>
 
       <%= link_to "Sign out", destroy_user_session_path, method: :delete, class:"nav-link" %>
 
@@ -44,3 +133,66 @@
 
 
       skip time to watch john elder...2.54.11 ----3.06.00
+
+
+
+      <li class="nav-item">
+            <%= link_to "About Us", home_about_path, class:"nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Friends", friends_path, class:"nav-link" %>
+          </li>
+
+          <!-- only if user signed in -->
+
+         <%   if user_signed_in? %>
+             <li class="nav-item">
+                <%= link_to "Add Friend", new_friend_path, class:"nav-link" %>
+             </li>
+
+             <li class="nav-item">
+                <%= button_to "Log out", destroy_user_session_path, method: :delete, class:"nav-link btn btn-primary" %>
+             </li>
+             <li class="nav-item">
+               <%= link_to "Edit Profile", edit_user_registration_path, class:"nav-link" %>
+             </li>
+
+           <!-- only if user not signed in -->
+           <% else %>  
+             <li class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class:"nav-link" %>
+             </li>
+             <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class:"nav-link" %>
+             </li>
+         <% end %>
+
+<%= form_with(model: @friend), html: { multipart: true } do |form| %>
+
+
+
+
+         
+<div class="jumbotron">
+  <h1 class="display-4">Hello Bloggers!</h1>
+  <p class="lead">TThis is my one of many of my Blog first web page more and interesting information coming soon.</p>
+  <hr class="my-4">
+  <p>This Web up is yours to use feel free to interect with it, make one pf best diary book.</p>
+  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+</div>
+
+
+       <style>
+body {
+   background-image: url('#');
+}
+</style>
+
+ <br/>
+
+  <%= link_to "Edit this friend", edit_friend_path(@friend), class:"btn btn-secondary" %>  
+  <%= link_to "Back to friends", friends_path, class:"btn btn-dark" %> <br/><br/>
+  <%= button_to "Destroy this friend", @friend, method: :delete %>
+</div>
+
+<%= render @friend %>
